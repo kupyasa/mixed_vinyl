@@ -13,12 +13,13 @@ class VinylController extends AbstractController
     #[Route('/', name: 'app_vinyl')]
     public function index(): Response
     {
-        return new Response(
-            'Welcome to your new controller!',
-        );
+        
+        return $this->render('vinyl/homepage.html.twig',[
+            'title' => 'PB & Jams'
+        ]);
     }
 
-    #[Route('/browse/{slug}', name: 'app_vinyl')]
+    #[Route('/browse/{slug}', name: 'browse')]
     public function browse(string $slug = null): Response
     {
         if ($slug) {
@@ -26,7 +27,7 @@ class VinylController extends AbstractController
         } else {
             $title = "All Genres";
         }
-        
+
         return new Response($title);
     }
 }
