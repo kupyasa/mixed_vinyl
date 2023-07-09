@@ -10,24 +10,32 @@ use Symfony\Component\String\UnicodeString;
 
 class VinylController extends AbstractController
 {
-    #[Route('/', name: 'app_vinyl')]
+    #[Route('/', name: 'app_homepage')]
     public function index(): Response
     {
-        
-        return $this->render('vinyl/homepage.html.twig',[
-            'title' => 'PB & Jams'
+        $tracks = [
+            ['song' => 'Gangsta\'s Paradise', 'artist' => 'Coolio'],
+            ['song' => 'Waterfalls', 'artist' => 'TLC'],
+            ['song' => 'Creep', 'artist' => 'Radiohead'],
+            ['song' => 'Kiss from a Rose', 'artist' => 'Seal'],
+            ['song' => 'On Bended Knee', 'artist' => 'Boyz II Men'],
+            ['song' => 'Fantasy', 'artist' => 'Mariah Carey'],
+        ];
+
+        return $this->render('vinyl/homepage.html.twig', [
+            'title' => 'PB & Jams',
+            'tracks' => $tracks
         ]);
     }
 
-    #[Route('/browse/{slug}', name: 'browse')]
+    #[Route('/browse/{slug}', name: 'app_browse')]
     public function browse(string $slug = null): Response
     {
-        if ($slug) {
-            $title = 'Genre : ' . strtoupper(str_replace('-', ' ', $slug));
-        } else {
-            $title = "All Genres";
-        }
 
-        return new Response($title);
+        $genre = $slug ? strtoupper(str_replace('-', ' ', $slug)) : null;
+
+        return $this->render('vinyl/browse.html.twig', [
+            'genre' => $genre
+        ]);
     }
 }
