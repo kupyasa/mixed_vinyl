@@ -15,7 +15,8 @@ class SongController extends AbstractController
         $song = [
             'id' => $id,
             'song' => "Are We Moving Too Fast?",
-            'artist' => "Malibu '92"
+            'artist' => "Malibu '92",
+            'url' => 'http://commondatastorage.googleapis.com/codeskulptor-assets/Collision8-Bit.ogg'
         ];
         $logger->info('Returning API response for song {song}', [
             'song' => $id,
